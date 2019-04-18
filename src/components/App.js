@@ -1,12 +1,65 @@
 import React from "react";
-import Navbar from "./Navbar";
+import AppNavBar from "./AppNavBar";
 import MarqueryPage from "./MarqueryPage";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
 
-export default () => {
+const Profile = props => (
+  <div className="Profile page">Profile</div>
+);
+
+const Account = props => (
+  <div className="Account page">Account</div>
+);
+
+const About = props => (
+  <div className="About page">About</div>
+);
+
+const PageNotFound = ({ location }) => (
+  <div className="PageNotFound page">No match found for <code>{location.pathname}</code></div>
+);
+
+const LoggedOut = props => (
+  <div className="LoggedOut page">You're now logged out</div>
+);
+
+const styles = theme =>({
+  contentContainer: {
+    paddingTop: theme.spacing.unit * 15,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    maxWidth: 1024,
+    margin: 'auto'
+  }
+});
+
+const profileLinks = [
+  { text: 'Profile', route: '/profile' },
+  { text: 'My Account', route: '/account' }
+];
+
+const App = props => {
+  const { classes } = props;
+  const auth = true;
+
   return (
     <div className="App">
-      <Navbar title="Check" />
-      <MarqueryPage />
+      <Router>
+        <AppNavBar title="Marquery" profileLinks={profileLinks} auth={auth} />
+        <div className={classes.contentContainer}>
+          <Switch>
+            <Route exact path="/" component={MarqueryPage} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/account/logout" component={LoggedOut} />
+            <Route path="/account" component={Account} />
+            <Route path="/about" component={About} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 };
+
+export default withStyles(styles)(App);

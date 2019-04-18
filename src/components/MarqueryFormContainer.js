@@ -7,7 +7,11 @@ import {
   change
 } from "redux-form";
 import { connect } from "react-redux";
-import { Button, Grid, withStyles } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  withStyles
+} from "@material-ui/core";
 import PropTypes from "prop-types";
 
 import { notEmpty } from "../helpers/validate";
@@ -17,18 +21,22 @@ import RenderRadioGroup from "./RenderRadioGroup";
 import RenderHiddenInput from "./RenderHiddenInput";
 import { RenderHTMLFileUploadButton } from "./RenderFileUploadButton";
 
-const styles = {
+const styles = theme => ({
   code: {
     fontFamily: "monospace"
   },
   clearButton: {
-    marginLeft: 20
+    marginLeft: theme.spacing.unit * 2
+  },
+  uploadButtonContainer: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
   },
   radioGroup: {
     justifyContent: "center",
     flexDirection: "row"
   }
-};
+});
 
 let MarqueryForm = props => {
   const {
@@ -75,7 +83,7 @@ let MarqueryForm = props => {
               ]}
             />
             {chosenCodeInputMethod === "file" && (
-              <>
+              <div className={classes.uploadButtonContainer}>
                 <Field
                   required={true}
                   name="file"
@@ -91,7 +99,7 @@ let MarqueryForm = props => {
                 <Field component={RenderHiddenInput} name="fileName" />
                 <Field component={RenderHiddenInput} name="fileUploadStatus" />
                 <Field component={RenderHiddenInput} name="data" />
-              </>
+              </div>
             )}
 
             {chosenCodeInputMethod === "paste" && (
@@ -100,9 +108,9 @@ let MarqueryForm = props => {
                 label="Code"
                 required={true}
                 multiline={true}
-                className={classes.code}
                 rows={8}
                 fullWidth={true}
+                className={classes.code}
                 component={RenderTextField}
                 validate={[notEmpty]}
               />

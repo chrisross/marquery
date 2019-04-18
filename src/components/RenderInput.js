@@ -20,7 +20,7 @@ const RenderInput = ({
   <FormControl
     required={required}
     fullWidth={fullWidth}
-    error={touched && error}
+    error={touched && error ? true : false}
   >
     <InputLabel htmlFor={input.name}>{label}</InputLabel>
     <Input

@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
+import PropTypes from 'prop-types';
 
 const RenderTextField = ({
   input,
@@ -19,13 +20,30 @@ const RenderTextField = ({
     rows={rows}
     placeholder={placeholder}
     fullWidth={fullWidth}
-    className={className}
     helperText="Paste HTML code here"
     error={touched && error ? true : false}
     {...input}
+    InputProps={{
+      className
+    }}
     variant="outlined"
     margin="normal"
   />
 );
+
+RenderTextField.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  required: PropTypes.bool,
+  className: PropTypes.string,
+  multiline: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  placeholder: PropTypes.string,
+  rows: PropTypes.number,
+  meta: PropTypes.shape({
+    error: PropTypes.string,
+    touched: PropTypes.bool
+  })
+};
 
 export default RenderTextField;
