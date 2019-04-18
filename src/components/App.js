@@ -3,6 +3,7 @@ import AppNavBar from "./AppNavBar";
 import MarqueryPage from "./MarqueryPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
+import AppFooter from "./AppFooter";
 
 const Profile = props => (
   <div className="Profile page">Profile</div>
@@ -24,12 +25,14 @@ const LoggedOut = props => (
   <div className="LoggedOut page">You're now logged out</div>
 );
 
-const styles = theme =>({
-  contentContainer: {
+const styles = theme => ({
+  content: {
     paddingTop: theme.spacing.unit * 15,
+    paddingBottom: theme.spacing.unit * 10,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     maxWidth: 1024,
+    minHeight: 400,
     margin: 'auto'
   }
 });
@@ -47,7 +50,7 @@ const App = props => {
     <div className="App">
       <Router>
         <AppNavBar title="Marquery" profileLinks={profileLinks} auth={auth} />
-        <div className={classes.contentContainer}>
+        <div className={classes.content}>
           <Switch>
             <Route exact path="/" component={MarqueryPage} />
             <Route path="/profile" component={Profile} />
@@ -58,6 +61,7 @@ const App = props => {
           </Switch>
         </div>
       </Router>
+      <AppFooter />
     </div>
   );
 };

@@ -19,7 +19,7 @@ import AppBarProfileMenu from './AppBarProfileMenu';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   grow: {
     flexGrow: 1
@@ -52,7 +52,6 @@ const AppNavBar = props => {
             className: classes.drawer
           }}
           variant="temporary"
-          classes={classes.drawer}
           onClose={handleDrawerToggle}
         >
           <MenuList>
