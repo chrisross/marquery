@@ -1,0 +1,3 @@
+const marqueryForm = {};
+
+export { marqueryForm };
